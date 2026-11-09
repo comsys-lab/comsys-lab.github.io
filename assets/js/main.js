@@ -43,7 +43,31 @@
 		}
 
 	// Menu.
-		var $menu = $('#menu');
+		var $menu = $('#menu'),
+			$headerNav = $header.children('nav'),
+			$menuLinks = $menu.find('.links'),
+			$menuToggle = $();
+
+		if ($headerNav.length && $menuLinks.length) {
+			$menuToggle = $('<a href="#menu" class="mobile-menu-toggle" aria-controls="menu" aria-expanded="false">Menu</a>')
+				.appendTo($headerNav);
+			$headerNav.addClass('has-mobile-menu');
+
+			var $github = $headerNav.children('a[href^="https://github.com/comsys-lab"]').first();
+
+			if ($github.length)
+				$('<li>').append($github.clone()).appendTo($menuLinks);
+		}
+
+		function setMenuVisible(visible) {
+			$body.toggleClass('is-menu-visible', visible);
+			$menuToggle.attr('aria-expanded', visible);
+
+			if (visible)
+				$menu.find('.close').trigger('focus');
+			else
+				$menuToggle.filter(':visible').trigger('focus');
+		}
 
 		$menu._locked = false;
 
@@ -65,21 +89,21 @@
 		$menu._show = function() {
 
 			if ($menu._lock())
-				$body.addClass('is-menu-visible');
+				setMenuVisible(true);
 
 		};
 
 		$menu._hide = function() {
 
-			if ($menu._lock())
-				$body.removeClass('is-menu-visible');
+			if ($body.hasClass('is-menu-visible') && $menu._lock())
+				setMenuVisible(false);
 
 		};
 
 		$menu._toggle = function() {
 
 			if ($menu._lock())
-				$body.toggleClass('is-menu-visible');
+				setMenuVisible(!$body.hasClass('is-menu-visible'));
 
 		};
 
@@ -110,6 +134,11 @@
 				.on('click', 'a', function(event) {
 
 					var href = $(this).attr('href');
+
+					if (this.target === '_blank') {
+						$menu._hide();
+						return;
+					}
 
 					event.preventDefault();
 					event.stopPropagation();

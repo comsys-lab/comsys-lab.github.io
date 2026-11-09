@@ -3201,25 +3201,19 @@ input, select, textarea {
 
 		}
 
-		@media screen and (max-width: 480px) {
+		#header nav .mobile-menu-toggle {
+			display: none;
+		}
 
-			#header nav a[href="#menu"] {
-				width: 4em;
-				white-space: nowrap;
-				text-indent: 4em;
-				position: relative;
+		@media screen and (max-width: 800px) {
+
+			#header nav.has-mobile-menu > a {
+				display: none;
 			}
 
-				#header nav a[href="#menu"]:before {
-					width: inherit;
-					position: absolute;
-					top: 0;
-					left: 0;
-					text-indent: 0;
-					text-align: right;
-					margin-left: 0;
-					padding-right: 1.25em;
-				}
+			#header nav.has-mobile-menu > .mobile-menu-toggle {
+				display: inline-block;
+			}
 
 		}
 
@@ -3265,6 +3259,7 @@ input, select, textarea {
 		top: 0;
 		visibility: hidden;
 		width: 100%;
+		z-index: 10001;
 	}
 
 		#menu .inner {
@@ -3337,7 +3332,7 @@ input, select, textarea {
 						background: #45558d;
 					}
 
-		@media screen and (max-width: 736px) {
+		@media screen and (max-width: 800px) {
 
 			#menu .inner {
 				max-height: 100%;
