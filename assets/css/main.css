@@ -3073,7 +3073,7 @@ input, select, textarea {
 		-webkit-transition: background-color 0.2s ease-in-out;
 		-ms-transition: background-color 0.2s ease-in-out;
 		transition: background-color 0.2s ease-in-out;
-		background-color: rgba(53, 56, 73, 0.95);
+		background-color: #353849;
 		height: 3.5em;
 		left: 0;
 		line-height: 3.5em;
@@ -3162,7 +3162,7 @@ input, select, textarea {
 					}
 
 		#header.alt {
-			background-color: transparent;
+			background-color: #353849;
 		}
 
 			#header.alt h1 {
